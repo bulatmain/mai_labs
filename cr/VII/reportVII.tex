@@ -1,0 +1,575 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1, T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{tempora}
+\usepackage[11pt]{extsizes}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{ifthen}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ulined}{}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs, babel, quotes, calc, arrows.meta}
+
+\usepackage{graphicx}
+
+\pagestyle{empty}
+\makeatletter
+\newcounter{i}
+\newcommand{\PrintEmptyLines}[1]{\setcounter{i}{1}\@whilenum\value{i}<#1\do{\stepcounter{i}\EmptyLine\\} \ifnum #1>0 {\EmptyLine}\fi}
+\makeatother
+\newcommand\arulefill[1]{{\expandafter \ulined #1 \hfill}}
+\newcommand{\EmptyLine}{\null\arulefill{}}
+\newcommand{\mrule}[1]{\rule[-2.8pt]{#1}{.4pt}}
+\newcounter{EmptyLines1}
+\newcounter{EmptyLines2}
+\newcounter{EmptyLines3}
+\newcounter{EmptyLines10}
+\newcounter{EmptyLines11}
+\newcounter{EmptyLines12}
+
+\linespread{0.9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% НИЖЕ ПОЛЯ ДЛЯ ЗАПОЛНЕНИЯ %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\LabNumber}{VIII}  % номер ЛР
+\newcommand{\Discipline}{Алгоритмы и структуры данных}  % название дисциплины (курса)
+\newcommand{\StudentGroup}{М8О-103Б-22}  % группа студента
+\newcommand{\StudentName}{Ахметшин Булат Рамилевич}  % имя студента
+\newcommand{\StudentNumber}{2}  % номер по списку
+\newcommand{\StudentContacts}{ahmbulat04@yandex.ru}  % контакты студента
+\newcommand{\DateOfCompletion}{05.05.2023 г.}  % дата выполнения работы
+\newcommand{\Teacher}{доцент каф. 806 Никулин С.П.}  % преподаватель
+\newcommand{\NumberVariant}{2 - \{4, 2, 3\}}  % номер варианта
+
+\newcommand{\Texti}{}  % Тема
+\newcommand{\Textii}{
+}  % Цель работы
+\newcommand{\Textiii}{
+}  % Задание 
+\newcommand{\Textvi}{
+}  % Идея, метод, алгоритм
+\newcommand{\Textvii}{
+}  % Сценарий выполнения работы
+
+\newcommand{\Textviii}{\scriptsize }  % Распечатка протокола
+
+\newcommand{\Textx}{}  % Замечания автора
+\newcommand{\Textxi}{
+}  % Выводы
+\newcommand{\Textxii}{}  % Устранение недочётов
+
+% Количество пустых подчеркнутых полей для:
+
+\setcounter{EmptyLines1}{1}  % Тема
+\setcounter{EmptyLines2}{2}  % Цель работы
+\setcounter{EmptyLines3}{3}  % Задание
+\setcounter{EmptyLines10}{3}  % Замечания автора
+\setcounter{EmptyLines11}{3}  % Выводы
+\setcounter{EmptyLines12}{5}  % Устранение недочётов
+
+\begin{document}
+\begin{minipage}{0.1\textwidth}
+    \fbox{\rule[2.1cm]{1.7cm}{0pt}}
+    \vspace{3.5cm}
+\end{minipage}
+\begin{minipage}{0.858\textwidth}
+    \begin{center}
+        \Large\textbf{Отчет по лабораторной работе № {\LabNumber} по курсу \uline\Discipline}
+    \end{center}
+    
+    \begin{doublespace}
+        \vbox{\hfill\vbox{%
+        \hbox{Студент группы \uline{\StudentGroup \ \StudentName}, № по списку \uline\StudentNumber}%
+        \hbox{Контакты www, e-mail, icq, skype \uline{\StudentContacts}}
+        }}
+    \end{doublespace}
+    \begin{doublespace}
+        \vbox{\hfill\vbox{%
+        \hbox{Работа выполнена: \DateOfCompletion}%
+        \hbox{Преподаватель: \uline{\Teacher}}%
+        \hbox{Входной контроль знаний с оценкой \mrule{3.3cm}}%
+        \hbox{Отчет сдан << \hspace{0.3cm} >> \mrule{1.5cm} 202 \mrule{.3cm} г., итоговая оценка \mrule{.5cm}}
+        }}
+    \end{doublespace}
+    \hfill\hbox{Подпись преподавателя \mrule{3cm}}
+\end{minipage}
+
+
+\begin{enumerate}[label=\textbf{\arabic*}.]
+
+\item \textbf{Тема:} {\footnotesize Линейные списки.} \arulefill{\Texti} \\ 
+\PrintEmptyLines{\value{EmptyLines1}}
+
+\item \textbf{Цель работы:} {\footnotesize Составить и отладить программу на языке Си для обработки линейного списка заданной организации с отображением списка на динамические структуры.} \arulefill{\Textii} \\
+\PrintEmptyLines{\value{EmptyLines2}}
+
+\item \textbf{Задание} (\textit{вариант № \NumberVariant}): {\footnotesize Вид списка - линейный однонаправленный, тип элемента - строковый, нестандартное действие - удаление подсписка слева и справа от данного элемента.} \arulefill{\Textiii} \\
+\PrintEmptyLines{\value{EmptyLines3}}
+
+\item \textbf{Оборудование} (\textit{лабораторное}):\\
+ЭВМ \EmptyLine, процессор \EmptyLine, имя узла сети \EmptyLine \ c ОП \EmptyLine \ Мб,\\
+НМД \EmptyLine \ Мб. Терминал \EmptyLine \ адрес \EmptyLine. Принтер \EmptyLine \\
+Другие устройства \EmptyLine \\ \EmptyLine \\
+
+%=========================================================
+%====================ОБОРУДОВАНИЕ=========================
+%=========================================================
+\textit{Оборудование ПЭВМ студента, если использовалось:}\\
+Процессор \arulefill{Intel(R) Core(TM) i7-10510U}\EmptyLine \ с ОП \arulefill{8 ГБ}\EmptyLine \, НМД \arulefill{SSD 512 ГБ}\EmptyLine \ . Монитор \arulefill{Встроенный 1920х1080}\EmptyLine \\
+Другие устройства \arulefill{}\EmptyLine \\ \EmptyLine
+%=========================================================
+
+\item \textbf{Программное обеспечение} (\textit{лабораторное}):\\
+Операционная система семейства \EmptyLine, наименование \EmptyLine \ версия \EmptyLine \\
+интерпретатор команд \EmptyLine \ версия \EmptyLine \\
+Система программирования \EmptyLine \ версия \EmptyLine \\
+Редактор текстов \EmptyLine \ версия \EmptyLine \\
+Утилиты операционной системы \EmptyLine \\ \EmptyLine \\
+Прикладные системы и программы \EmptyLine \\
+Местонахождение и имена файлов программ и данных \EmptyLine \\ \EmptyLine \\
+
+%=========================================================
+%====================ОБЕСПЕЧЕНИЕ==========================
+%=========================================================
+\textit{Программное обеспечение ЭВМ студента, если использовалось:}\\
+Операционная система семейства \arulefill{UNIX}\EmptyLine, наименование \arulefill{Ubuntu}\EmptyLine \ версия \arulefill{22.04}\EmptyLine \\
+интерпретатор команд \arulefill{GNU bash}\EmptyLine \ версия \arulefill{5.1.16}\EmptyLine \\
+Система программирования \arulefill{ Visual Studio Code}\EmptyLine \ версия \arulefill{ 1.77.3}\EmptyLine \\
+Редактор текстов \arulefill{Sublime Text 3}\EmptyLine \ версия \arulefill{3211}\EmptyLine \\
+Утилиты операционной системы \arulefill{Стандартные утилиты OS Linux}\EmptyLine \\
+Прикладные системы и программы \arulefill{Редактор текста nano.}\EmptyLine \\
+Местонахождение и имена файлов программ и данных на домашнем компьютере \\\arulefill{/home/bulat/Studying/prprm/cr/VIII/}\EmptyLine \\
+%=========================================================
+
+\item 
+\begin{minipage}[t][0.45\textheight]{.95\textwidth}
+\textbf{Идея, метод, алгоритм} {\footnotesize решение задачи (в формах: словесной, псевдокода, графической [блок-схема, диаграмма, рисунок, таблица] или формальные спецификации с пред- и постусловиями)} \\ \Textvi
+
+{\footnotesize Алгоритм нестандартной задачи я реализую следующим образом:
+
+\begin{enumerate}
+    \item Найти элемент в списке с указанным значчением.
+    \item Если требуется удалить список слева - вызвать функцию удаления подсписка от его начала до найденного элемента.
+    \item Если Требуется удалить список справа - вызвать функцию удаления подсписка от найденного элемента до конца.
+\end{enumerate}
+
+Функция удаления подсписка принимает в аргументы правую и левую границы списка и удаляет все элементы, кроме крайнего правого.}
+
+\end{minipage}
+\item 
+\begin{minipage}[t][0.43\textheight]{.95\textwidth}
+\textbf{Сценарий выполнения работы} {\footnotesize (план работы, первоначальный текст программы в черновике [можно на отдельном листе] и тесты либо соображения по тестированию)} \\ \Textvii
+
+{\footnotesize Составить makefile, написать реализацию линейного одностороннего списка и требуемую нестандартную функцию.}
+
+\end{minipage}
+
+\textit{Пункты 1-7 отчета составляются строго до начала лабораторной работы.} \\
+\hfill\hbox{\textit{Допущен к выполнению работы.} \textbf{Подпись преподавателя \mrule{4cm}}}
+
+\item 
+\textbf{Распечатка протокола} {\footnotesize (подклеить листинг окончательного варианта программы с тестовыми примерами, подписанный преподавателем)} \\
+
+%=========================================================
+%====================ПРОТОКОЛ=============================
+%=========================================================
+
+\scriptsize
+\centering
+\begin{verbatim}
+    bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ ls
+    list.c  list.h  logs  main.c  makefile  tex
+    bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ cat list.h
+    #ifndef _LIST_H
+    #define _LIST_H
+    
+    #include <stdbool.h>
+    #include <inttypes.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    
+    typedef uint64_t size_t;
+    
+    typedef struct {
+        char* p;
+        size_t l;
+    } string;
+    
+    string make_string(char*);
+    bool strings_eq(string, string);
+    
+    typedef struct node {
+        struct node* r;
+        string s;
+    } node;
+    
+    node* make_node(string);
+    
+    void link_node(node*, node*, node*);
+    
+    void link_nodes(node*, node*);
+    
+    void node_free(node*);
+    
+    typedef struct {
+        node* begin;
+        node* back;
+        size_t size;
+    } list;
+    
+    void list_create_empty(list*);
+    
+    void list_add(list*, string, size_t);
+    
+    node* list_find_node(list*, string);
+    
+    void list_remove(list*, string);
+    
+    void list_remove_subtree(list*, node*, node*);
+    
+    void list_free(list*);
+    
+    size_t list_len(node*, node*);
+    
+    void list_print(list*);
+    
+    void list_cut(list*, char, string);
+    
+    
+    #endifbulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ cat list.c
+    #include "list.h"
+    
+    string make_string(char* p) {
+        string s;
+        s.p = p;
+        s.l = 0;
+        while (s.p[s.l] != '\0') {
+            ++s.l;
+        }
+        return s;
+    }
+    
+    bool string_eq(string a, string b) {
+        if (a.l != b.l) {
+            return false;
+        }
+        size_t i = 0;
+        while (i < a.l) {
+            if (a.p[i] != b.p[i]) {
+                return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+    
+    node* make_node(string s) {
+        node* p = (node*)malloc(sizeof(node));
+        p->r = NULL;
+        p->s = s;
+        return p;
+    }
+    
+    void link_node(node* l, node* m, node* r) {
+        if (! (l == NULL))
+            l->r = m;
+        m->r = r;
+    }
+    
+    void link_nodes(node* l, node* r) {
+        if (! (l == NULL)) {
+            l->r = r;
+        }
+    }
+    
+    void node_free(node* p) {
+        free(p->s.p);
+        p->s.p = NULL;
+        p->s.l = 0;
+        p->r = NULL;
+    }
+    
+    void list_create_empty(list* l) {
+        l->begin = l->back = NULL;
+        l->size = 0;
+    }
+    
+    void list_add(list* l, string s, size_t index) {
+        node* _p = make_node(s);
+        if (index < l->size) {
+            node* p = l->begin;
+            for (size_t i = 0; i < index; ++i) {
+                p = p->r;
+            }
+            link_node(p, _p, p->r);
+        } else {
+            if (l->back == NULL) {
+                l->begin = l->back = _p;
+                l->size = 0;
+            } else {
+                link_node(l->back, _p, NULL);
+                l->back = _p;
+            }
+        }
+        l->size++;
+    }
+    
+    node* list_find_node(list* l, string s) {
+        node* p = l->begin;
+        while (! (p == NULL) && ! string_eq(p->s, s)) {
+            p = p->r;
+        }
+        return p;
+    }
+    
+    void list_remove(list* l, string s) {
+        if (! (l->begin == NULL) && string_eq(l->begin->s, s)) {
+            node* r = l->begin;
+            l->begin = l->begin->r;
+            if (l->begin == NULL) {
+                l->back = NULL;
+            } else {
+                link_nodes(l->begin, l->begin->r->r);
+            }
+            node_free(r);
+            l->size--;
+        }
+        else {
+            node* p = l->begin;
+            while (!(p->r == NULL) && ! string_eq(p->r->s, s)) {
+                p = p->r;
+            }
+            if (! (p->r == NULL)) {
+                node* r = p->r;
+                link_nodes(p, p->r->r);
+                node_free(r);
+                l->size--;
+            }
+        }
+    }
+    
+    void list_remove_subtree(list* l, node* s, node* e) {
+        node* p = l->begin,* r;
+        if (p != s) {
+            while (! (p->r == NULL) && ! (p->r == s)) {
+                p = p->r;
+            }
+            if (p->r == NULL) {
+                return;
+            }
+            if (e == NULL) {
+                l->back = p;
+            }
+            r = p->r;
+            p->r = e;
+            p = r;
+        } else {
+            l->begin = e;
+        }
+        while (! (p->r == NULL) && ! (p->r == e)) {
+            r = p;
+            p = p->r;
+            node_free(r);
+            --l->size;
+        }
+        node_free(p);
+        --l->size;
+    }
+    
+    void list_free(list* l) {
+        if (l->begin == NULL) {
+            l->back = NULL;
+            l->size = 0;
+            return;
+        }
+        node* p = l->begin,* r;
+        while (! (p->r == NULL)) {
+            r = p;
+            p = p->r;
+            node_free(r);
+        }
+        node_free(p);
+        l->begin = l->back = NULL;
+        l->size = 0;
+    }
+    
+    size_t list_len(node* l, node* r) {
+        if (l == NULL || r == NULL) {
+            return 0;
+        }
+        node* p = l;
+        size_t len = 1;
+        while (! (p == r)) {
+            p = p->r; ++len;
+        }
+        return len;
+    }
+    
+    void list_print(list* l) {
+        printf("{");
+        if (! (l->begin == NULL)) {
+            node* p = l->begin;
+            while (! (p->r == NULL)) {
+                printf(" %s,", p->s.p);
+                p = p->r;
+            }
+            printf(" %s ", p->s.p);
+        }
+        printf("}");
+    }
+    
+    void list_cut(list* l, char side, string s) {
+        node* p = list_find_node(l, s);
+        if (p == NULL) {
+            return;
+        }
+        if (side == 'l' && ! (p == l->begin)) {
+            list_remove_subtree(l, l->begin, p);
+        } else if (side == 'r' && ! (p->r == NULL)) {
+            list_remove_subtree(l, p->r, NULL);
+        }
+    }bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ cat main.c 
+    #include <stdio.h>
+    #include <inttypes.h>
+    
+    #include "list.h"
+    
+    char* int64_t_to_str(int64_t x) {
+        char* p;
+        if (x == 0) {
+            p = (char*)malloc(sizeof(char) * 2);
+            p[0] = '0';
+            p[1] = '\0';
+        }
+        else {
+            int64_t _x = x;
+            size_t l = 0;
+            while (_x != 0) {
+                _x /= 10;
+                ++l;
+            }
+            if (x < 0) {
+                p = (char*)malloc(sizeof(char) * (l + 2));
+                p[0] = '-';
+                ++l;
+                x = -x;
+            } else {
+                p = (char*)malloc(sizeof(char) * (l + 1));
+            }
+            p[l] = '\0';
+            while (x != 0) {
+                p[--l] = (char)((x % 10) + 48);
+                x /= 10;
+            }
+        }
+        
+        return p;
+    }
+    
+    
+    int main() {
+    
+        list l;
+        
+        list_create_empty(&l);
+    
+        for (size_t i = 0; i < 10; ++i) {
+            list_add(&l, make_string(int64_t_to_str(i)), l.size);
+        }
+    
+        printf("Add function illustration:\n");
+        list_print(&l);
+        printf(", length: %ld\n", list_len(l.begin, l.back));
+    
+        list_remove(&l, make_string(int64_t_to_str(5)));
+    
+        printf("Remove function illustration:\n");
+        list_print(&l);
+        printf(", length: %ld\n", list_len(l.begin, l.back));
+    
+        list_cut(&l, 'l', make_string(int64_t_to_str(6)));
+    
+        printf("Cut sides function illustration:\n");
+        list_print(&l);
+        printf(", length: %ld\n", list_len(l.begin, l.back));
+    
+        list_cut(&l, 'r', make_string(int64_t_to_str(6)));
+    
+        printf("Cut sides function illustration:\n");
+        list_print(&l);
+        printf(", length: %ld\n", list_len(l.begin, l.back));
+    
+        list_remove(&l, make_string(int64_t_to_str(6)));
+    
+        printf("Remove function illustration:\n");
+        list_print(&l);
+        printf(", length: %ld\n", list_len(l.begin, l.back));
+    
+        return 0;
+    }bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ cat makefile 
+    CC = gcc
+    CFLAGS = -std=c99 -Wall -Wextra
+    
+    main: main.o list.o
+        $(CC) $(CFLAGS) -o main main.o list.o
+    main_o:
+        $(CC) $(CFLAGS) -c main.c
+    deque_o:
+        $(CC) $(CFLAGS) -c list.c
+    clean:
+        rm -f *.o main
+    bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ make
+    gcc -std=c99 -Wall -Wextra   -c -o main.o main.c
+    gcc -std=c99 -Wall -Wextra   -c -o list.o list.c
+    gcc -std=c99 -Wall -Wextra -o main main.o list.o
+    bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/VII$ ./main 
+    Add function illustration:
+    { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, length: 10
+    Remove function illustration:
+    { 0, 1, 2, 3, 4, 6, 7, 8, 9 }, length: 9
+    Cut sides function illustration:
+    { 6, 7, 8, 9 }, length: 4
+    Cut sides function illustration:
+    { 6 }, length: 1
+    Remove function illustration:
+    {}, length: 0
+\end{verbatim}
+
+\large{}
+
+\newpage
+
+\item \textbf{Дневник отладки} {\footnotesize должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.} \\
+\begin{tabular}[t]{|c|c|c|c|c|c|c|}
+\hline
+№ & \begin{tabular}[t]{c} Лаб. \\ или \\ дом. \end{tabular} & Дата & Время & \hspace{.7cm} Событие \hspace{.7cm} & Действие по исправлению & \hspace{.7cm} Примечание \hspace{.7cm} \\
+\hline
+\begin{minipage}[t][0.45\textheight]{0.01\textwidth}\end{minipage} & & & & & &\\
+\hline
+\end{tabular}
+
+\item \textbf{Замечания автора} {\footnotesize по существу работы:} \arulefill{\Textx} \\
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+\item \textbf{Выводы:} \arulefill{\footnotesize В ходе этой лабораторной работы я получил опыт реализации линейного одностороннего списка.} \Textxi \\
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+
+\item Недочёты при выполнении задания могут быть устранены следующим образом: {\footnotesize} \arulefill{\Textx}
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+ \begin{flushright}
+Подпись студента \mrule{4cm}
+\end{flushright}
+
+\end{enumerate}
+
+\end{document}

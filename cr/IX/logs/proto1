@@ -1,0 +1,468 @@
+Script started on 2023-06-06 17:52:36+03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="80" LINES="16"]
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ cat[K[K[Kls
+[?2004l[0m[01;34mlogs[0m    makefile             sorted.txt  [01;34mtex[0m
+main.c  reversed_sorted.txt  table.h     unsorted.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ cat makefile 
+[?2004lCC = gcc
+CFLAGS = -std=c99 -Wall -Wextra -Wformat=0
+
+main:
+	$(CC) $(CFLAGS) -o main main.c
+debug:
+	$(CC) $(CFLAGS) -g -o main main.c
+
+clean:
+	rm -f *.o main[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ cat table.h 
+[?2004l#ifndef TABLE_H
+#define TABLE_H
+
+#include <inttypes.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define STRING_KEY_CAP 28
+
+typedef uint64_t size_t;
+
+typedef struct {
+    char key_s[STRING_KEY_CAP];
+    int key_int;
+} complex_key;
+
+typedef struct {
+    complex_key key;
+    char *value;
+} item;
+
+typedef struct {
+    item *rows;
+    uint64_t count;
+    uint64_t max_key;
+} table;
+
+
+table table_alloc();
+
+table table_copy(table t);
+void table_push(table *t, char *key_s, int key_int, char *value);
+table table_quick_sort(table t);
+
+char *table_binary_search(table t, char *key_s, int key_int);
+
+void table_print(table t);
+
+void table_dealloc(table *t);
+
+
+#endif // TABLE_H
+
+
+
+#ifdef TABLE_IMPLEMENTATION
+
+table table_alloc() {
+    table t;
+    t.rows = (item*) calloc(0, sizeof(item));
+    t.count = 0;
+    t.max_key = 0;
+    return t;
+}
+
+
+item item_copy(item* const a) {
+    complex_key ck = {
+        .key_int = a->key.key_int
+    };
+
+    for (int i = 0; i < STRING_KEY_CAP && i < (int) strlen(a->key.key_s); ++i) {
+        ck.key_s[i] = a->key.key_s[i];
+    }
+    
+    char *value = (char*) calloc(256, sizeof(char));
+    strcpy(value, a->value);
+
+    item i = {
+        .key = ck,
+        .value = value
+    };
+    return i;
+}
+
+table table_copy(table t) {
+    table temp = table_alloc();
+
+    for (uint64_t i = 0; i < t.count; ++i) {
+        char *value = (char*) calloc(256, sizeof(char));
+        strcpy(value, t.rows[i].value);
+        table_push(&temp, t.rows[i].key.key_s, t.rows[i].key.key_int, value);
+    }
+
+    return temp;
+}
+
+void table_push(table *t, char *key_s, int key_int, char *value) {
+    complex_key ck = {
+        .key_int = key_int
+    };
+
+    for (int i = 0; i < STRING_KEY_CAP && i < (int) strlen(key_s); ++i) {
+        ck.key_s[i] = key_s[i];
+    }
+
+    item i = {
+        .key = ck,
+        .value = value
+    };
+
+    if (t->max_key < key_int) {
+        t->max_key = key_int;
+    }
+
+    t->rows = (item*) realloc(t->rows, sizeof(item) * (t->count + 1));
+    t->count++;
+
+    t->rows[t->count - 1] = i;
+}
+
+table counting_sort(table* const A) {
+    size_t n = A->count, k = A->max_key;
+
+    size_t* P = (size_t*)calloc(k, sizeof(size_t));
+
+    for (size_t i = 0; i < n; ++i) {
+        ++P[A->rows[i].key.key_int - 1];
+    }
+    for (size_t i = 1; i < k; ++i) {
+        P[i] += P[i - 1];
+    }
+    for (size_t i = k; i > 1; --i) {
+        P[i - 1] = P[i - 2];
+    }
+    P[0] = 0;
+
+    table B;
+    B.rows = (item*)calloc(n, sizeof(item));
+
+    for (size_t i = 0; i < n; ++i) {
+        size_t p = A->rows[i].key.key_int;
+        item t = item_copy(&(A->rows[i]));
+        B.rows[P[p - 1]] = t;
+        ++P[p - 1];
+    }
+
+    B.count = A->count;
+    B.max_key = A->max_key;
+
+    return B;
+}
+
+void _table_quick_sort(table *t, uint64_t l, uint64_t r) {
+    char *pivot_value = t->rows[l].value;
+    complex_key pivot_key = t->rows[l].key;
+    uint64_t l_init = l, r_init = r;
+
+    while (l < r) {
+        while (
+            (
+                strcmp(pivot_key.key_s, t->rows[r].key.key_s) < 0 ||
+                (
+                    strcmp(pivot_key.key_s, t->rows[r].key.key_s) == 0 &&
+                    pivot_key.key_int <= t->rows[r].key.key_int
+                )
+            ) && (l < r)
+        ) r--;
+
+        if (l != r) {
+            t->rows[l].value = t->rows[r].value;
+            t->rows[l].key = t->rows[r].key;
+            l++;
+        }
+
+        while (
+            strcmp(pivot_key.key_s, t->rows[l].key.key_s) > 0 &&
+            (l < r)
+        ) l++;
+
+        if (l != r) {
+            t->rows[r].value = t->rows[l].value;
+            t->rows[r].key = t->rows[l].key;
+            r--;
+        }
+    }
+
+    t->rows[l].key = pivot_key;
+    t->rows[l].value = pivot_value;
+
+    uint64_t pivot = l;
+    l = l_init;
+    r = r_init;
+
+    if (l < pivot) _table_quick_sort(t, l, pivot - 1);
+    if (r > pivot) _table_quick_sort(t, pivot + 1, r);
+}
+
+// sort keys by elements
+table table_quick_sort(table t) {
+    table temp = table_copy(t);
+
+    _table_quick_sort(&temp, 0, temp.count - 1);
+
+    return temp;
+}
+
+
+char *table_binary_search(table t, char *key_s, int key_int) {
+    int64_t l = 0, r = t.count - 1, m = (l + r)/2;
+
+    while (l <= r) {
+        m = (l + r)/2;
+
+        char *curr_key_s = t.rows[m].key.key_s;
+        int curr_key_int = t.rows[m].key.key_int;
+
+        if (strcmp(key_s, curr_key_s) == 0 && key_int == curr_key_int) {
+            return t.rows[m].value;
+        }
+ 
+        if ((key_int >= curr_key_int)) {
+            l = m + 1;
+        } else {
+            r = m - 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+void table_print(table t) {
+    printf(
+        "| Key%*s| Value\n", STRING_KEY_CAP + 11 - 3, ""
+    );
+
+    for (uint64_t i = 0; i < t.count; ++i) {
+        printf("| %*s%11d| %s\n", STRING_KEY_CAP, t.rows[i].key.key_s, t.rows[i].key.key_int, t.rows[i].value);
+    }
+}
+
+
+void table_dealloc(table *t) {
+    for (uint64_t i = 0; i < t->count; ++i) {
+        t->rows[i].key.key_s[0] = '\0';
+        t->rows[i].key.key_int = 0;
+        free(t->rows[i].value);
+    }
+
+    free(t->rows);
+}
+
+#endif // TABLE_IMPLEMENTATION[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ cat main.c 
+[?2004l#define TABLE_IMPLEMENTATION
+#include "table.h"
+
+
+int main() {
+    table t = table_alloc();
+
+    uint64_t count = 0;
+    scanf("%ld", &count);
+    
+    printf("Table: ");
+    for (uint64_t i = 0; i < count; ++i) {
+
+        char *key_s = (char*) calloc(256, sizeof(char));
+        scanf("%s", key_s);
+
+        int key_int = 0;
+        scanf("%d", &key_int);
+
+        char *value = (char*) calloc(256, sizeof(char));
+        scanf("%s", value);
+
+        table_push(&t, key_s, key_int, value);
+
+        free(key_s);
+    }
+    printf("\n");
+
+    table_print(t);
+    printf("\n");
+    table s = counting_sort(&t);
+    table_print(s);
+
+    int search = 1;
+    while (search) {
+        char *key_s = (char*) calloc(256, sizeof(char));
+        int key_int = 0;
+        scanf("%s", key_s);
+        scanf("%d", &key_int);
+        printf("Search for:(%s, %d)\n", key_s, key_int);
+
+        printf("Found string: %s\n", table_binary_search(s, key_s, key_int));
+        free(key_s);
+
+        printf("Do you want to continue the search? (0/1): ");
+        scanf("%d", &search);
+    }
+
+    printf("\n");
+
+    table_dealloc(&t);
+}[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ make
+[?2004lgcc -std=c99 -Wall -Wextra -Wformat=0 -o main main.c
+In file included from [01m[Kmain.c:2[m[K:
+[01m[Ktable.h:[m[K In function ‘[01m[Ktable_push[m[K’:
+[01m[Ktable.h:105:20:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kuint64_t[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} and ‘[01m[Kint[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  105 |     if (t->max_key [01;35m[K<[m[K key_int) {
+      |                    [01;35m[K^[m[K
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ ./main <sorted.txt 
+[?2004lTable: 
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ ./main <sorted.txt [K[K[K[K[K[K[K[K[K[K[Kunsorted.txt 
+[?2004lTable: 
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          8| Alice
+|              LegalDepartment         18| Freya
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         15| Patrix
+|            DevelopmentCentre          5| Alice
+|            DevelopmentCentre          7| Frida
+|              LegalDepartment          2| George
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         10| Morty
+|     TransportationDepartment          3| Jacob
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         12| Daniel
+|              LegalDepartment          6| Ioan
+|          FinancialDepartment         14| Michel
+|          FinancialDepartment         11| Rick
+|            DevelopmentCentre         17| Jane
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ ./main <unsorted.txt [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P r e versed_sorted.txt 
+[?2004lTable: 
+| Key                                    | Value
+|              LegalDepartment         18| Freya
+|            DevelopmentCentre         17| Jane
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         15| Patrix
+|          FinancialDepartment         14| Michel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         11| Rick
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre          8| Alice
+|            DevelopmentCentre          7| Frida
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          5| Alice
+|     TransportationDepartment          4| Kevin
+|     TransportationDepartment          3| Jacob
+|              LegalDepartment          2| George
+|     TransportationDepartment          1| Mike
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/cr/IV[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/cr/IV[00m$ exit
+[?2004lexit
+
+Script done on 2023-06-06 17:53:11+03:00 [COMMAND_EXIT_CODE="0"]

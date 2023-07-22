@@ -1,0 +1,7 @@
+str="abcdefg"
+for (( i=0; i<${#str}; i++ )); 
+do
+	file=${str:i:1}.txt
+	echo $RANDOM | md5sum | head -c -20 > $file
+	touch -d "$(date -R -r $file) - $i days" $file
+done

@@ -1,0 +1,215 @@
+Script started on 2023-03-05 12:15:26+03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="80" LINES="24"]
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ mkdir test && cd test && ./fgen [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcat fgen 
+[?2004l
+str="abcdefg"
+for (( i=0; i<${#str}; i++ )); 
+do
+	file=${str:i:1}.txt
+	echo $RANDOM | md5sum | head -c -20 > $file
+	touch -d "$(date -R -r $file) - $i days" $file
+done
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ cat crm.sh 
+[?2004l
+#!/bin/bash
+
+suffix=""
+days_left=0
+dir_path="./"
+rm_flags=""
+
+alert_wrong_syntacs="Wrong syntacs. Please try to use this command with such template:\n\
+\n\tcrm [ -s <file_suffix> ] [ -d <days_left> ] [ -p <directory_path> ] [-r <rm_command_flags> ]\n\
+\nOr read short manual using: crm --help\n"
+
+help_page="This is the short manual of usage command crm - custom remove.\n\n\
+crm command has following syntacs:\n\n\
+\tcrm [ -s <file_suffix> ] [ -d <days_left> ] [ -p <directory_path> ] [-r <rm_command_flags> ]\n\n\
+and those following flags:\n\n\
+\t-s, --suffix\t\tremoves only those files that end up with given suffix.\n\
+\t\t\t\tSuffix can not contain not allowed characters: /\\!@#$^&*():;'\"<>,?|~\`[]{}+ \n\
+\t-d, --days_left\t\tremoves only those files that wasn't accessed last <days_left> days.\n\
+\t-p, --directory_path\t\tremoves only tohs files in directory with given path.\n\
+\t-r, --rm_flags\t\tsets given flags to remove command such as: -f, -i, -I, -r, -d, -v.\n\
+\t--help\t\t\tShows this supporting page.\n"
+
+n=$#
+
+if [[ $((n%2)) -eq 1 ]]; then
+	if [[ $n == 1 ]]; then
+		echo -e $help_page
+		exit 0
+	else
+		echo -e $alert_wrong_syntacs
+		exit 0
+	fi
+fi
+
+for (( i=1; i<=n; i++ )); do
+	if [[ ${!i} == "-s" || ${!i} == "--suffix" ]]; then
+		j=$((i+1))
+		s_=${!j}
+		not_allowed_symbols="/\\!@#$^&*():;'\"<>,?|~\`[]{}+"
+		wrong=0
+		for (( k=0; k<${#s_}; k++ )); do
+			if [[ "$not_allowed_symbols" ==  *"${s_:k:1}"* ]]; then
+				if [[ $wrong == 0 ]]; then
+					echo -e "\nCan not execute command with suffix contain now allowed symbols:"
+					wrong=1
+				fi
+				if [[ $wrong == 1 ]]; then
+					echo -n ${s_:k:1} "_"
+				fi
+			fi
+		done
+		if [[ $wrong == 1 ]]; then
+				echo -e "\n"
+				exit 0
+		fi
+		suffix=$s_
+	elif [[ ${!i} == "-d" || ${!i} == "--days_left" ]]; then
+		j=$((i+1))
+		d_=${!j}
+		if [[ "$d_" =~ "^[0-9]+$" ]]; then
+			echo -e "Wrong format of <days_left>. \
+It should be an integer amount.\n\
+May be you should read a short manual using:\t crm --help\n"
+			exit 0
+		fi
+		days_left=$d_
+	elif [[ ${!i} == "-p" || ${!i} == "--directory_path" ]]; then
+		j=$((i+1))
+		p_=${!j}
+		if [[ $p_ == /* && -d "$p_" ]]; then
+			dir_path=$p_
+		elif [[ -d "`pwd`/$p_" ]]; then
+			dir_path=`pwd`/$p_
+		else
+			echo -e "Choosen directory do not exist\n"
+			exit 0
+		fi
+	elif [[ ${!i} == "-r" || ${!i} == "--rm_flags" ]]; then
+		j=$((i+1))
+		r_=${!j}
+		allowed_flags="fiIrdv"
+		for (( k=1;k<${#r_}; k++ )); do
+			if [[ "$allowed_flags" != *"${r_:k:1}"* ]]; then
+				echo -e "You have given not allowed <rm_flags>. Please, check the description using:\tcrm --help\n"
+				exit 0
+			fi
+		done
+		rm_flags=$r_
+	else
+		j=$((i-1))
+		if [[ $i == 1 || ${!j} != -* ]]; then
+			echo -e $alert_wrong_syntacs
+			exit 0
+		fi
+	fi
+done
+
+files=`find $dir_path -iname "*$suffix" -atime +$((days_left-1))`
+
+for i in $files; do
+	rm $rm_flags $i
+	echo -e "Deleted file: $i\n"
+done
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ ..[K[Kc[K./crm.sh - -[K[K- hep[K[K[K[Khelp
+[?2004l
+This is the short manual of usage command crm - custom remove.
+
+crm command has following syntacs:
+
+	crm [ -s <file_suffix> ] [ -d <days_left> ] [ -p <directory_path> ] [-r <rm_command_flags> ]
+
+and those following flags:
+
+	-s, --suffix		removes only those files that end up with given suffix.
+				Suffix can not contain not allowed characters: /\!@#$^&*():;'"<>,?|~`[]{}+ 
+	-d, --days_left		removes only those files that wasn't accessed last <days_left> days.
+	-p, --directory_path		removes only tohs files in directory with given path.
+	-r, --rm_flags		sets given flags to remove command such as: -f, -i, -I, -r, -d, -v.
+	--help			Shows this supporting page.
+
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ mkdir test && cd test && ../t[Kfgen && - 
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl 
+s-[K -la
+[?2004l
+итого 36
+drwxrwxr-x 2 bulat bulat 4096 мар  5 12:16 [0m[01;34m.[0m
+drwxrwxr-x 3 bulat bulat 4096 мар  5 12:16 [01;34m..[0m
+-rw-rw-r-- 1 bulat bulat   16 мар  5 12:16 a.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  4 12:16 b.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  3 12:16 c.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  2 12:16 d.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  1 12:16 e.txt
+-rw-rw-r-- 1 bulat bulat   16 фев 28 12:16 f.txt
+-rw-rw-r-- 1 bulat bulat   16 фев 27 12:16 g.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ ../crm.sh -s .txt -d 2[K3[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcd ../
+[?2004l
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ ./crm.sh -s .tt[Kxt -d 2 -p test/.test//test/
+[?2004l
+Deleted file: /home/bulat/Studying/l21/./test/e.txt
+
+Deleted file: /home/bulat/Studying/l21/./test/d.txt
+
+Deleted file: /home/bulat/Studying/l21/./test/g.txt
+
+Deleted file: /home/bulat/Studying/l21/./test/c.txt
+
+Deleted file: /home/bulat/Studying/l21/./test/f.txt
+
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21[00m$ ls -la ./test/
+[?2004l
+итого 16
+drwxrwxr-x 2 bulat bulat 4096 мар  5 12:17 [0m[01;34m.[0m
+drwxrwxr-x 3 bulat bulat 4096 мар  5 12:16 [01;34m..[0m
+-rw-rw-r-- 1 bulat bulat   16 мар  5 12:16 a.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  4 12:16 b.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ for i in {1..5};
+[?2004l
+[?2004h> do
+[?2004l
+[?2004h> mkdir ${i}d **[K[K&& touch -d "$(date _r -r [1P[1P[1@-[1@R[C[C[C[C${i}d) - $i" -[K${d}[K[Kid[K}d[1@ [1@d[1@a[1@y[1@s[C[C[C[C[C[C[C
+[?2004l
+[?2004h> done
+[?2004l
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ ls
+[?2004l
+[0m[01;34m1d[0m  [01;34m2d[0m  [01;34m3d[0m  [01;34m4d[0m  [01;34m5d[0m  a.txt  b.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ ls -la
+[?2004l
+итого 36
+drwxrwxr-x 7 bulat bulat 4096 мар  5 12:27 [0m[01;34m.[0m
+drwxrwxr-x 3 bulat bulat 4096 мар  5 12:26 [01;34m..[0m
+drwxrwxr-x 2 bulat bulat 4096 мар  4 12:27 [01;34m1d[0m
+drwxrwxr-x 2 bulat bulat 4096 мар  3 12:27 [01;34m2d[0m
+drwxrwxr-x 2 bulat bulat 4096 мар  2 12:27 [01;34m3d[0m
+drwxrwxr-x 2 bulat bulat 4096 мар  1 12:27 [01;34m4d[0m
+drwxrwxr-x 2 bulat bulat 4096 фев 28 12:27 [01;34m5d[0m
+-rw-rw-r-- 1 bulat bulat   16 мар  5 12:16 a.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  4 12:16 b.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ ../crm -s d -d 2 -r -rf[1@.[1@s[1@g[1P[1@h
+[?2004l
+Deleted file: ./3d
+
+Deleted file: ./4d
+
+Deleted file: ./5d
+
+Deleted file: ./2d
+
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ ls -la
+[?2004l
+итого 20
+drwxrwxr-x 3 bulat bulat 4096 мар  5 12:28 [0m[01;34m.[0m
+drwxrwxr-x 3 bulat bulat 4096 мар  5 12:26 [01;34m..[0m
+drwxrwxr-x 2 bulat bulat 4096 мар  4 12:27 [01;34m1d[0m
+-rw-rw-r-- 1 bulat bulat   16 мар  5 12:16 a.txt
+-rw-rw-r-- 1 bulat bulat   16 мар  4 12:16 b.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/l21/test[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/l21/test[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-03-05 12:28:40+03:00 [COMMAND_EXIT_CODE="0"]

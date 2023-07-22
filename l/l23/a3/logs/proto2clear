@@ -1,0 +1,149 @@
+Script started on 2023-05-15 16:35:06+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ ls
+[?2004ll23-2012.djvu  [0m[01;34mlogs[0m  [01;32mmain[0m  main.c  string.c  string.h  tree.c  tree.h
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ cp ~/Downloads/_____231[K-1.pdf ./reporn2[K[Kt23.pdf
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ cd ../l21
+[?2004lbash: cd: ../l21: Нет такого файла или каталога
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ ls
+[?2004ll23-2012.djvu  [0m[01;32mmain[0m    report23.pdf  string.h  tree.h
+[01;34mlogs[0m           main.c  string.c      tree.c
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l23/a3[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l23/a3[00m$ cd ../../l21
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ celar
+[?2004lКоманда «celar» не найдена. Возможно, вы имели в виду:
+  command 'clear' from deb ncurses-bin (6.3-2)
+Try: sudo apt install <deb name>
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ l
+[?2004l[0m[01;32mcrm.sh[0m*  [01;32mfgen[0m*  l21_1.log  l21_2.log  proto  report21.pdf  [01;34mtest[0m/
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ s[Kcode ,.[K[K./
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ cp ~/Downloads/l21-2012.djvu  ./
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ ls
+[?2004l[0m[01;32mcrm.sh[0m  [01;32mfgen[0m  l21_1.log  l21-2012.djvu  l21_2.log  proto  report21.pdf  [01;34mtest[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ evince
+[?2004l
+(evince:85552): Gtk-[1;33mWARNING[0m **: [34m17:30:35.096[0m: Loading IM context type 'xim' failed
+
+(evince:85552): Gtk-[1;33mWARNING[0m **: [34m17:30:35.100[0m: Loading IM context type 'xim' failed
+
+(evince:85552): Gtk-[1;33mWARNING[0m **: [34m17:30:35.102[0m: Loading IM context type 'xim' failed
+
+(evince:85552): Gtk-[1;33mWARNING[0m **: [34m17:30:35.104[0m: Loading IM context type 'xim' failed
+
+(evince:85552): Gtk-[1;33mWARNING[0m **: [34m17:30:35.136[0m: Loading IM context type 'xim' failed
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ evince l21-2012.djvu 
+[?2004l
+(evince:85590): Gtk-[1;33mWARNING[0m **: [34m17:30:41.985[0m: Loading IM context type 'xim' failed
+
+(evince:85590): Gtk-[1;33mWARNING[0m **: [34m17:30:41.989[0m: Loading IM context type 'xim' failed
+
+(evince:85590): Gtk-[1;33mWARNING[0m **: [34m17:30:41.991[0m: Loading IM context type 'xim' failed
+
+(evince:85590): Gtk-[1;33mWARNING[0m **: [34m17:30:41.994[0m: Loading IM context type 'xim' failed
+
+(evince:85590): Gtk-[1;33mWARNING[0m **: [34m17:30:42.027[0m: Loading IM context type 'xim' failed
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/prprm/l/l21[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/prprm/l/l21[00m$ cd ../../../DM/
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ ls
+[?2004l[0m[01;34mcr[0m  mkmxlt.py  README.md  [01;34mrgr[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ cd [K[K[Kcd [K[K[Kclear[K[K[K[K[Klc[K[Kcd rgr/
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ ls
+[?2004lRGdm2sem.pdf  [0m[01;34mrgr_1[0m  [01;34mrgr_2[0m  [01;34mrgr_3[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ firefox RGdm2sem.pdf 
+[?2004lGtk-[1;32mMessage[0m: [34m17:47:37.918[0m: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ ls ../[K[K[K[K[K[Kls
+[?2004lRGdm2sem.pdf  [0m[01;34mrgr_1[0m  [01;34mrgr_2[0m  [01;34mrgr_3[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ ls rgr_1
+[?2004l[0m[01;34m1attempt[0m  [01;34m2attempt[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ ls rgr_1.[K/1attempt/
+[?2004lrgr_1.aux          rgr_1.fls  rgr_1.pdf         rgr_1.tex
+rgr_1.fdb_latexmk  rgr_1.log  [0m[01;31mrgr_1.synctex.gz[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ mkdir rgr_4
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ cd t[Krgr_4
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_4[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_4[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_4[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_4[00m$ mkdir rge_4[K[K[Kr_4/[K.p[Ktex[1P rgr_4.tex[1P rgr_4.tex[1P rgr_4.tex[1P rgr_4.tex[1P rgr_4.texc rgr_4.texo rgr_4.texd rgr_4.texe rgr_4.tex
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_4[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_4[00m$ св юю.[K[K[K[K[K[Kcd ../ && mkdri[K[Kor[K[Kir rgr_2[K4[K5 && cd  rgr_5
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_5[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_5[00m$ code ./
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_5[00m$ сдуфк
+[?2004lсдуфк: команда не найдена
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_5[00m$ Ч[Kclear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr/rgr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr/rgr_5[00m$ cd ../../cr/
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ l
+[?2004l [0m[01;34mcr_1[0m/
+ [01;34mcr_2[0m/
+ [01;34mcr_3[0m/
+ [01;34mcr_4[0m/
+ Varianty_Kursovoy_raboty_2_semestr.pdf
+'Методические указания к выполнению курсовой работы по теории графов (С.О. Смерчинская, Н.П. Яшина).pdf'
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ s[Kmkdir cr_5
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ firefox Varianty_Kursovoy_raboty_2_semestr.pdf 
+[?2004lGtk-[1;32mMessage[0m: [34m18:44:43.587[0m: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ cd cr_5
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ cel[K[Klear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ св [K[K[Kls
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ code [K[K[K[K[Kcode ./
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ св [K[K[Kcleawr
+[?2004lclКоманда «cleawr» не найдена. Возможно, вы имели в виду:
+  command 'clear' from deb ncurses-bin (6.3-2)
+Try: sudo apt install <deb name>
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ clear[Kr
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr/cr_5[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr/cr_5[00m$ cd ~
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34mApplications[0m  [01;34mDesktop[0m    [01;34mDownloads[0m  [01;34mPictures[0m  [01;34msnap[0m      [01;34mTemplates[0m  [01;34mVideos[0m
+[01;34mcode[0m          [01;34mDocuments[0m  [01;34mMusic[0m      [01;34mPublic[0m    [01;34mStudying[0m  [01;34mtokens[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~[00m$ mkdir to[Kmo[Kp && cp ~/DOwm[K[K[Kownloads/KH[Khemmin_piton.txt ~/Do wnloads/VKlyuch_piton.txt ~/Downloads/9[K8_dost_i_sv_v_piton.txt ~/tmp
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~[00m$ l[Kcd tmp
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ ls
+[?2004l8_dost_i_sv_v_piton.txt  Khemmin_piton.txt  VKlyuch_piton.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ clr[K[Ke[K[Kclear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ mv *.txt ./*,[K.py
+[?2004lmv: указанная цель './*.py' не является каталогом
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ l
+[?2004l8_dost_i_sv_v_piton.txt  Khemmin_piton.txt  VKlyuch_piton.txt
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ clear[K[K[K[K[Kmv 8_dost_i_sv_v_piton.txt 8_dost_i_sv_v_piton.txt [K[K[K[Kpy
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ mv 8_dost_i_sv_v_piton.txt 8_dost_i_sv_v_piton.py[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kmk[Kv Khemmin_piton.txt Khemmin_piton.txt [K[K[K[Kpy
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ mv VKlyuch_piton.txt VKlyuch_piton.txt [K[K[K[Kpy
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ ls
+[?2004l8_dost_i_sv_v_piton.py  Khemmin_piton.py  VKlyuch_piton.py
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ сщв[K[K[Kcoe [K[Kde ./
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ cp ~/H[KKP_5[K4_l[Kki[K[K[K[K[K[K[KD[KDownloads/KP_4_killer.xlsx ~/tpm[K[Knp[K[Kmp
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ firer[Kfox ~/Studying/DM/
+cr/   .git/ rgr/  
+]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ firefox ~/Studying/DM/rgr/
+RGdm2sem.pdf  rgr_2/        rgr_4/        
+rgr_1/        rgr_3/        rgr_5/        
+]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ firefox ~/Studying/DM/rgr/rgr2
+[?2004lGtk-[1;32mMessage[0m: [34m21:30:36.973[0m: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/tmp[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/tmp[00m$ cd ~/D[KStudying/DM/R[Krgr/[K[K[K[K
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ ls
+[?2004l[0m[01;34mcr[0m  mkmxlt.py  README.md  [01;34mrgr[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM[00m$ c[Kcd rgr/
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ ls
+[?2004lRGdm2sem.pdf  [0m[01;34mrgr_1[0m  [01;34mrgr_2[0m  [01;34mrgr_3[0m  [01;34mrgr_4[0m  [01;34mrgr_5[0m
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ firefox RGdm2sem.pdf 
+[?2004lGtk-[1;32mMessage[0m: [34m21:30:55.944[0m: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/rgr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/rgr[00m$ cd ../[K/cr/
+[?2004l[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ ls
+[?2004l [0m[01;34mcr_1[0m
+ [01;34mcr_2[0m
+ [01;34mcr_3[0m
+ [01;34mcr_4[0m
+ [01;34mcr_5[0m
+ Varianty_Kursovoy_raboty_2_semestr.pdf
+'Методические указания к выполнению курсовой работы по теории графов (С.О. Смерчинская, Н.П. Яшина).pdf'
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ firefox Varianty_Kursovoy_raboty_2_semestr.pdf 
+[?2004lGtk-[1;32mMessage[0m: [34m21:31:13.210[0m: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;bulat@bulat-Swift-SF314-58: ~/Studying/DM/cr[01;32mbulat@bulat-Swift-SF314-58[00m:[01;34m~/Studying/DM/cr[00m$ exit
+[?2004lexit
+
+Script done on 2023-05-18 13:01:24+03:00 [COMMAND_EXIT_CODE="0"]

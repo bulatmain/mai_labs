@@ -1,0 +1,677 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1, T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{tempora}
+\usepackage[11pt]{extsizes}
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{ifthen}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ulined}{}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs, babel, quotes, calc, arrows.meta}
+
+\usepackage{graphicx}
+
+\pagestyle{empty}
+\makeatletter
+\newcounter{i}
+\newcommand{\PrintEmptyLines}[1]{\setcounter{i}{1}\@whilenum\value{i}<#1\do{\stepcounter{i}\EmptyLine\\} \ifnum #1>0 {\EmptyLine}\fi}
+\makeatother
+\newcommand\arulefill[1]{{\expandafter \ulined #1 \hfill}}
+\newcommand{\EmptyLine}{\null\arulefill{}}
+\newcommand{\mrule}[1]{\rule[-2.8pt]{#1}{.4pt}}
+\newcounter{EmptyLines1}
+\newcounter{EmptyLines2}
+\newcounter{EmptyLines3}
+\newcounter{EmptyLines10}
+\newcounter{EmptyLines11}
+\newcounter{EmptyLines12}
+
+\linespread{0.9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% НИЖЕ ПОЛЯ ДЛЯ ЗАПОЛНЕНИЯ %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\LabNumber}{IX}  % номер ЛР
+\newcommand{\Discipline}{Алгоритмы и структуры данных}  % название дисциплины (курса)
+\newcommand{\StudentGroup}{М8О-103Б-22}  % группа студента
+\newcommand{\StudentName}{Ахметшин Булат Рамилевич}  % имя студента
+\newcommand{\StudentNumber}{2}  % номер по списку
+\newcommand{\StudentContacts}{ahmbulat04@yandex.ru}  % контакты студента
+\newcommand{\DateOfCompletion}{05.05.2023 г.}  % дата выполнения работы
+\newcommand{\Teacher}{доцент каф. 806 Никулин С.П.}  % преподаватель
+\newcommand{\NumberVariant}{2 - \{2, 8\}}  % номер варианта
+
+\newcommand{\Texti}{}  % Тема
+\newcommand{\Textii}{
+}  % Цель работы
+\newcommand{\Textiii}{
+}  % Задание 
+\newcommand{\Textvi}{
+}  % Идея, метод, алгоритм
+\newcommand{\Textvii}{
+}  % Сценарий выполнения работы
+
+\newcommand{\Textviii}{\scriptsize }  % Распечатка протокола
+
+\newcommand{\Textx}{}  % Замечания автора
+\newcommand{\Textxi}{
+}  % Выводы
+\newcommand{\Textxii}{}  % Устранение недочётов
+
+% Количество пустых подчеркнутых полей для:
+
+\setcounter{EmptyLines1}{1}  % Тема
+\setcounter{EmptyLines2}{2}  % Цель работы
+\setcounter{EmptyLines3}{3}  % Задание
+\setcounter{EmptyLines10}{3}  % Замечания автора
+\setcounter{EmptyLines11}{3}  % Выводы
+\setcounter{EmptyLines12}{5}  % Устранение недочётов
+
+\begin{document}
+\begin{minipage}{0.1\textwidth}
+    \fbox{\rule[2.1cm]{1.7cm}{0pt}}
+    \vspace{3.5cm}
+\end{minipage}
+\begin{minipage}{0.858\textwidth}
+    \begin{center}
+        \Large\textbf{Отчет по лабораторной работе № {\LabNumber} по курсу \uline\Discipline}
+    \end{center}
+    
+    \begin{doublespace}
+        \vbox{\hfill\vbox{%
+        \hbox{Студент группы \uline{\StudentGroup \ \StudentName}, № по списку \uline\StudentNumber}%
+        \hbox{Контакты www, e-mail, icq, skype \uline{\StudentContacts}}
+        }}
+    \end{doublespace}
+    \begin{doublespace}
+        \vbox{\hfill\vbox{%
+        \hbox{Работа выполнена: \DateOfCompletion}%
+        \hbox{Преподаватель: \uline{\Teacher}}%
+        \hbox{Входной контроль знаний с оценкой \mrule{3.3cm}}%
+        \hbox{Отчет сдан << \hspace{0.3cm} >> \mrule{1.5cm} 202 \mrule{.3cm} г., итоговая оценка \mrule{.5cm}}
+        }}
+    \end{doublespace}
+    \hfill\hbox{Подпись преподавателя \mrule{3cm}}
+\end{minipage}
+
+
+\begin{enumerate}[label=\textbf{\arabic*}.]
+
+\item \textbf{Тема:} {\footnotesize Сортировка и поиск.} \arulefill{\Texti} \\ 
+\PrintEmptyLines{\value{EmptyLines1}}
+
+\item \textbf{Цель работы:} {\footnotesize Составить программу на языке Си с использованием процедур и функций для сортировки таблицы заданным методом и двоичного поиска по ключу в таблице.} \arulefill{\Textii} \\
+\PrintEmptyLines{\value{EmptyLines2}}
+
+\item \textbf{Задание} (\textit{вариант № \NumberVariant}): {\footnotesize Сортировка - линейный выбор с подсчетом, таблица - ключ из строки и целого, 32 байта на ключ, хранение данных и ключей вместе, минимальное число элементов - 18.} \arulefill{\Textiii} \\
+\PrintEmptyLines{\value{EmptyLines3}}
+
+\item \textbf{Оборудование} (\textit{лабораторное}):\\
+ЭВМ \EmptyLine, процессор \EmptyLine, имя узла сети \EmptyLine \ c ОП \EmptyLine \ Мб,\\
+НМД \EmptyLine \ Мб. Терминал \EmptyLine \ адрес \EmptyLine. Принтер \EmptyLine \\
+Другие устройства \EmptyLine \\ \EmptyLine \\
+
+%=========================================================
+%====================ОБОРУДОВАНИЕ=========================
+%=========================================================
+\textit{Оборудование ПЭВМ студента, если использовалось:}\\
+Процессор \arulefill{Intel(R) Core(TM) i7-10510U}\EmptyLine \ с ОП \arulefill{8 ГБ}\EmptyLine \, НМД \arulefill{SSD 512 ГБ}\EmptyLine \ . Монитор \arulefill{Встроенный 1920х1080}\EmptyLine \\
+Другие устройства \arulefill{}\EmptyLine \\ \EmptyLine
+%=========================================================
+
+\item \textbf{Программное обеспечение} (\textit{лабораторное}):\\
+Операционная система семейства \EmptyLine, наименование \EmptyLine \ версия \EmptyLine \\
+интерпретатор команд \EmptyLine \ версия \EmptyLine \\
+Система программирования \EmptyLine \ версия \EmptyLine \\
+Редактор текстов \EmptyLine \ версия \EmptyLine \\
+Утилиты операционной системы \EmptyLine \\ \EmptyLine \\
+Прикладные системы и программы \EmptyLine \\
+Местонахождение и имена файлов программ и данных \EmptyLine \\ \EmptyLine \\
+
+%=========================================================
+%====================ОБЕСПЕЧЕНИЕ==========================
+%=========================================================
+\textit{Программное обеспечение ЭВМ студента, если использовалось:}\\
+Операционная система семейства \arulefill{UNIX}\EmptyLine, наименование \arulefill{Ubuntu}\EmptyLine \ версия \arulefill{22.04}\EmptyLine \\
+интерпретатор команд \arulefill{GNU bash}\EmptyLine \ версия \arulefill{5.1.16}\EmptyLine \\
+Система программирования \arulefill{ Visual Studio Code}\EmptyLine \ версия \arulefill{ 1.77.3}\EmptyLine \\
+Редактор текстов \arulefill{Sublime Text 3}\EmptyLine \ версия \arulefill{3211}\EmptyLine \\
+Утилиты операционной системы \arulefill{Стандартные утилиты OS Linux}\EmptyLine \\
+Прикладные системы и программы \arulefill{Редактор текста nano.}\EmptyLine \\
+Местонахождение и имена файлов программ и данных на домашнем компьютере \\\arulefill{/home/bulat/Studying/prprm/cr/IX/}\EmptyLine \\
+%=========================================================
+
+\item 
+\begin{minipage}[t][0.45\textheight]{.95\textwidth}
+\textbf{Идея, метод, алгоритм} {\footnotesize решение задачи (в формах: словесной, псевдокода, графической [блок-схема, диаграмма, рисунок, таблица] или формальные спецификации с пред- и постусловиями)} \\ \Textvi
+
+{\footnotesize Для реализации сортировки линейной выборкой будут учитываться только целача часть значения ключей, т.к. сам алгоритм работает с таким типом ключей. \\
+В качестве тестовых примеров я возьму список сотрудников некой организации, ключом сотрудника будет департамент и индекс, значением - имя сотрудника.} 
+\end{minipage}
+\item 
+\begin{minipage}[t][0.43\textheight]{.95\textwidth}
+\textbf{Сценарий выполнения работы} {\footnotesize (план работы, первоначальный текст программы в черновике [можно на отдельном листе] и тесты либо соображения по тестированию)} \\ \Textvii
+
+{\footnotesize Составить makefile, написать тестовые файлы, релизовать таблицу и функции обработки и сортировки, отладить, составить протокол.}
+
+\end{minipage}
+
+\textit{Пункты 1-7 отчета составляются строго до начала лабораторной работы.} \\
+\hfill\hbox{\textit{Допущен к выполнению работы.} \textbf{Подпись преподавателя \mrule{4cm}}}
+
+\item 
+\textbf{Распечатка протокола} {\footnotesize (подклеить листинг окончательного варианта программы с тестовыми примерами, подписанный преподавателем)} \\
+
+%=========================================================
+%====================ПРОТОКОЛ=============================
+%=========================================================
+
+\scriptsize
+\centering
+\begin{verbatim}
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ script logs/proto1
+Script started, output log file is 'logs/proto1'.
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ ls
+logs    makefile             sorted.txt  tex
+main.c  reversed_sorted.txt  table.h     unsorted.txt
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ cat makefile 
+CC = gcc
+CFLAGS = -std=c99 -Wall -Wextra -Wformat=0
+
+main:
+	$(CC) $(CFLAGS) -o main main.c
+debug:
+	$(CC) $(CFLAGS) -g -o main main.c
+
+clean:
+	rm -f *.o mainbulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ cat table.h 
+#ifndef TABLE_H
+#define TABLE_H
+
+#include <inttypes.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define STRING_KEY_CAP 28
+
+typedef uint64_t size_t;
+
+typedef struct {
+    char key_s[STRING_KEY_CAP];
+    int key_int;
+} complex_key;
+
+typedef struct {
+    complex_key key;
+    char *value;
+} item;
+
+typedef struct {
+    item *rows;
+    uint64_t count;
+    uint64_t max_key;
+} table;
+
+
+table table_alloc();
+
+table table_copy(table t);
+void table_push(table *t, char *key_s, int key_int, char *value);
+table table_quick_sort(table t);
+
+char *table_binary_search(table t, char *key_s, int key_int);
+
+void table_print(table t);
+
+void table_dealloc(table *t);
+
+
+#endif // TABLE_H
+
+
+
+#ifdef TABLE_IMPLEMENTATION
+
+table table_alloc() {
+    table t;
+    t.rows = (item*) calloc(0, sizeof(item));
+    t.count = 0;
+    t.max_key = 0;
+    return t;
+}
+
+
+item item_copy(item* const a) {
+    complex_key ck = {
+        .key_int = a->key.key_int
+    };
+
+    for (int i = 0; i < STRING_KEY_CAP && i < (int) strlen(a->key.key_s); ++i) {
+        ck.key_s[i] = a->key.key_s[i];
+    }
+    
+    char *value = (char*) calloc(256, sizeof(char));
+    strcpy(value, a->value);
+
+    item i = {
+        .key = ck,
+        .value = value
+    };
+    return i;
+}
+
+table table_copy(table t) {
+    table temp = table_alloc();
+
+    for (uint64_t i = 0; i < t.count; ++i) {
+        char *value = (char*) calloc(256, sizeof(char));
+        strcpy(value, t.rows[i].value);
+        table_push(&temp, t.rows[i].key.key_s, t.rows[i].key.key_int, value);
+    }
+
+    return temp;
+}
+
+void table_push(table *t, char *key_s, int key_int, char *value) {
+    complex_key ck = {
+        .key_int = key_int
+    };
+
+    for (int i = 0; i < STRING_KEY_CAP && i < (int) strlen(key_s); ++i) {
+        ck.key_s[i] = key_s[i];
+    }
+
+    item i = {
+        .key = ck,
+        .value = value
+    };
+
+    if (t->max_key < key_int) {
+        t->max_key = key_int;
+    }
+
+    t->rows = (item*) realloc(t->rows, sizeof(item) * (t->count + 1));
+    t->count++;
+
+    t->rows[t->count - 1] = i;
+}
+
+table counting_sort(table* const A) {
+    size_t n = A->count, k = A->max_key;
+
+    size_t* P = (size_t*)calloc(k, sizeof(size_t));
+
+    for (size_t i = 0; i < n; ++i) {
+        ++P[A->rows[i].key.key_int - 1];
+    }
+    for (size_t i = 1; i < k; ++i) {
+        P[i] += P[i - 1];
+    }
+    for (size_t i = k; i > 1; --i) {
+        P[i - 1] = P[i - 2];
+    }
+    P[0] = 0;
+
+    table B;
+    B.rows = (item*)calloc(n, sizeof(item));
+
+    for (size_t i = 0; i < n; ++i) {
+        size_t p = A->rows[i].key.key_int;
+        item t = item_copy(&(A->rows[i]));
+        B.rows[P[p - 1]] = t;
+        ++P[p - 1];
+    }
+
+    B.count = A->count;
+    B.max_key = A->max_key;
+
+    return B;
+}
+
+void _table_quick_sort(table *t, uint64_t l, uint64_t r) {
+    char *pivot_value = t->rows[l].value;
+    complex_key pivot_key = t->rows[l].key;
+    uint64_t l_init = l, r_init = r;
+
+    while (l < r) {
+        while (
+            (
+                strcmp(pivot_key.key_s, t->rows[r].key.key_s) < 0 ||
+                (
+                    strcmp(pivot_key.key_s, t->rows[r].key.key_s) == 0 &&
+                    pivot_key.key_int <= t->rows[r].key.key_int
+                )
+            ) && (l < r)
+        ) r--;
+
+        if (l != r) {
+            t->rows[l].value = t->rows[r].value;
+            t->rows[l].key = t->rows[r].key;
+            l++;
+        }
+
+        while (
+            strcmp(pivot_key.key_s, t->rows[l].key.key_s) > 0 &&
+            (l < r)
+        ) l++;
+
+        if (l != r) {
+            t->rows[r].value = t->rows[l].value;
+            t->rows[r].key = t->rows[l].key;
+            r--;
+        }
+    }
+
+    t->rows[l].key = pivot_key;
+    t->rows[l].value = pivot_value;
+
+    uint64_t pivot = l;
+    l = l_init;
+    r = r_init;
+
+    if (l < pivot) _table_quick_sort(t, l, pivot - 1);
+    if (r > pivot) _table_quick_sort(t, pivot + 1, r);
+}
+
+// sort keys by elements
+table table_quick_sort(table t) {
+    table temp = table_copy(t);
+
+    _table_quick_sort(&temp, 0, temp.count - 1);
+
+    return temp;
+}
+
+
+char *table_binary_search(table t, char *key_s, int key_int) {
+    int64_t l = 0, r = t.count - 1, m = (l + r)/2;
+
+    while (l <= r) {
+        m = (l + r)/2;
+
+        char *curr_key_s = t.rows[m].key.key_s;
+        int curr_key_int = t.rows[m].key.key_int;
+
+        if (strcmp(key_s, curr_key_s) == 0 && key_int == curr_key_int) {
+            return t.rows[m].value;
+        }
+ 
+        if ((key_int >= curr_key_int)) {
+            l = m + 1;
+        } else {
+            r = m - 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+void table_print(table t) {
+    printf(
+        "| Key%*s| Value\n", STRING_KEY_CAP + 11 - 3, ""
+    );
+
+    for (uint64_t i = 0; i < t.count; ++i) {
+        printf("| %*s%11d| %s\n", STRING_KEY_CAP, t.rows[i].key.key_s, t.rows[i].key.key_int, t.rows[i].value);
+    }
+}
+
+
+void table_dealloc(table *t) {
+    for (uint64_t i = 0; i < t->count; ++i) {
+        t->rows[i].key.key_s[0] = '\0';
+        t->rows[i].key.key_int = 0;
+        free(t->rows[i].value);
+    }
+
+    free(t->rows);
+}
+
+#endif // TABLE_IMPLEMENTATIONbulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ cat main.c 
+#define TABLE_IMPLEMENTATION
+#include "table.h"
+
+
+int main() {
+    table t = table_alloc();
+
+    uint64_t count = 0;
+    scanf("%ld", &count);
+    
+    printf("Table: ");
+    for (uint64_t i = 0; i < count; ++i) {
+
+        char *key_s = (char*) calloc(256, sizeof(char));
+        scanf("%s", key_s);
+
+        int key_int = 0;
+        scanf("%d", &key_int);
+
+        char *value = (char*) calloc(256, sizeof(char));
+        scanf("%s", value);
+
+        table_push(&t, key_s, key_int, value);
+
+        free(key_s);
+    }
+    printf("\n");
+
+    table_print(t);
+    printf("\n");
+    table s = counting_sort(&t);
+    table_print(s);
+
+    int search = 1;
+    while (search) {
+        char *key_s = (char*) calloc(256, sizeof(char));
+        int key_int = 0;
+        scanf("%s", key_s);
+        scanf("%d", &key_int);
+        printf("Search for:(%s, %d)\n", key_s, key_int);
+
+        printf("Found string: %s\n", table_binary_search(s, key_s, key_int));
+        free(key_s);
+
+        printf("Do you want to continue the search? (0/1): ");
+        scanf("%d", &search);
+    }
+
+    printf("\n");
+
+    table_dealloc(&t);
+}bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ make
+gcc -std=c99 -Wall -Wextra -Wformat=0 -o main main.c
+In file included from main.c:2:
+table.h: In function ‘table_push’:
+table.h:105:20: warning: comparison of integer expressions of different signedness: ‘uint64_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  105 |     if (t->max_key < key_int) {
+      |                    ^
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ ./main <sorted.txt 
+Table: 
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ ./main <unsorted.txt 
+Table: 
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          8| Alice
+|              LegalDepartment         18| Freya
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         15| Patrix
+|            DevelopmentCentre          5| Alice
+|            DevelopmentCentre          7| Frida
+|              LegalDepartment          2| George
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         10| Morty
+|     TransportationDepartment          3| Jacob
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         12| Daniel
+|              LegalDepartment          6| Ioan
+|          FinancialDepartment         14| Michel
+|          FinancialDepartment         11| Rick
+|            DevelopmentCentre         17| Jane
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+bulat@bulat-Swift-SF314-58:~/Studying/prprm/cr/IV$ ./main <reversed_sorted.txt 
+Table: 
+| Key                                    | Value
+|              LegalDepartment         18| Freya
+|            DevelopmentCentre         17| Jane
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         15| Patrix
+|          FinancialDepartment         14| Michel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         11| Rick
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre          8| Alice
+|            DevelopmentCentre          7| Frida
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          5| Alice
+|     TransportationDepartment          4| Kevin
+|     TransportationDepartment          3| Jacob
+|              LegalDepartment          2| George
+|     TransportationDepartment          1| Mike
+
+| Key                                    | Value
+|     TransportationDepartment          1| Mike
+|              LegalDepartment          2| George
+|     TransportationDepartment          3| Jacob
+|     TransportationDepartment          4| Kevin
+|            DevelopmentCentre          5| Alice
+|              LegalDepartment          6| Ioan
+|            DevelopmentCentre          7| Frida
+|            DevelopmentCentre          8| Alice
+|          FinancialDepartment          9| Alex
+|            DevelopmentCentre         10| Morty
+|          FinancialDepartment         11| Rick
+|          FinancialDepartment         12| Daniel
+|          FinancialDepartment         13| Belle
+|          FinancialDepartment         14| Michel
+|            DevelopmentCentre         15| Patrix
+|     TransportationDepartment         16| Paul
+|            DevelopmentCentre         17| Jane
+|              LegalDepartment         18| Freya
+Search for:(FinancialDepartment, 11)
+Found string: Rick
+Do you want to continue the search? (0/1): Search for:(LegalDepartment, 6)
+Found string: Ioan
+Do you want to continue the search? (0/1): Search for:(TransportationDepartment, 3)
+Found string: Jacob
+Do you want to continue the search? (0/1): 
+
+\end{verbatim}
+
+\large{}
+
+\newpage
+
+\item \textbf{Дневник отладки} {\footnotesize должен содержать дату и время сеансов отладки и основные события (ошибки в сценарии и программе, нестандартные ситуации) и краткие комментарии к ним. В дневнике отладки приводятся сведения об использовании ЭВМ, существенном участии преподавателя и других лиц в написании и отладке программы.} \\
+\begin{tabular}[t]{|c|c|c|c|c|c|c|}
+\hline
+№ & \begin{tabular}[t]{c} Лаб. \\ или \\ дом. \end{tabular} & Дата & Время & \hspace{.7cm} Событие \hspace{.7cm} & Действие по исправлению & \hspace{.7cm} Примечание \hspace{.7cm} \\
+\hline
+\begin{minipage}[t][0.45\textheight]{0.01\textwidth}\end{minipage} & & & & & &\\
+\hline
+\end{tabular}
+
+\item \textbf{Замечания автора} {\footnotesize по существу работы:} \arulefill{\Textx} \\
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+\item \textbf{Выводы:} \arulefill{\footnotesize В ходе этой лабораторной работы я получил опыт реализации таблиц с комплесными ключами и функций для их обработки и сортировки.} \Textxi \\
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+
+\item Недочёты при выполнении задания могут быть устранены следующим образом: {\footnotesize} \arulefill{\Textx}
+\PrintEmptyLines{\value{EmptyLines2}}\\
+
+ \begin{flushright}
+Подпись студента \mrule{4cm}
+\end{flushright}
+
+\end{enumerate}
+
+\end{document}

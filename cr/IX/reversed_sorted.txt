@@ -1,0 +1,26 @@
+18
+LegalDepartment 18 Freya
+DevelopmentCentre 17 Jane
+TransportationDepartment 16 Paul
+DevelopmentCentre 15 Patrix
+FinancialDepartment 14 Michel
+FinancialDepartment 13 Belle
+FinancialDepartment 12 Daniel
+FinancialDepartment 11 Rick
+DevelopmentCentre 10 Morty
+FinancialDepartment 9 Alex
+DevelopmentCentre 8 Alice
+DevelopmentCentre 7 Frida
+LegalDepartment 6 Ioan
+DevelopmentCentre 5 Alice
+TransportationDepartment 4 Kevin
+TransportationDepartment 3 Jacob
+LegalDepartment 2 George
+TransportationDepartment 1 Mike
+FinancialDepartment
+11
+LegalDepartment
+6
+TransportationDepartment
+3
+0
